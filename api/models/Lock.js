@@ -7,24 +7,23 @@
 
 module.exports = {
 
-  attributes: { 
-      
+  attributes: {
+
       state:{
           type : "boolean",
-          required : true  
+          required : true
       },
-      
+
       name:{
           type:"string",
           required: true,
-          minLength: 3 
+          minLength: 3
       },
-      
+
       userlist:{
-        collection: 'user',
-        via: 'users'
+        collection: 'user'
       }
-      
+
   }
 };
 

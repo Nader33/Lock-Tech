@@ -33,7 +33,7 @@ module.exports.passport = {
     }
   },
 
-  github: {
+  /*github: {
     name: 'GitHub',
     protocol: 'oauth2',
     strategy: require('passport-github').Strategy,
@@ -41,16 +41,16 @@ module.exports.passport = {
       clientID: 'your-client-id',
       clientSecret: 'your-client-secret'
     }
-  },
+  },*/
 
-  facebook: {
+  /*facebook: {
     name: 'Facebook',
     protocol: 'oauth2',
     strategy: require('passport-facebook').Strategy,
     options: {
       clientID: 'your-client-id',
       clientSecret: 'your-client-secret',
-      scope: ['email'] /* email is necessary for login behavior */
+      scope: ['email']
     }
   },
 
@@ -62,9 +62,9 @@ module.exports.passport = {
       clientID: 'your-client-id',
       clientSecret: 'your-client-secret'
     }
-  },
+  },*/
 
-  cas: {
+  /*cas: {
     name: 'CAS',
     protocol: 'cas',
     strategy: require('passport-cas').Strategy,
@@ -73,5 +73,5 @@ module.exports.passport = {
       serverBaseURL: 'http://localhost:1337',
       serviceURL: 'http://localhost:1337/auth/cas/callback'
     }
-  }
+  }*/
 };
