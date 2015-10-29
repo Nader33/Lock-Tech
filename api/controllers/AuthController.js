@@ -30,6 +30,23 @@ module.exports = {
       })
     })
   },
+  register: function (req, res) {
+    var username = req.param('username');
+    var email = req.param('email');
+    var password = req.param('password');
+
+    if(!username || !email || !password) return res.json(401, {err: 'Missing fields'});
+
+    User.findOne({email: email}, function(err, user){
+      if(err) return res.json(403, {err: 'forbidden'});
+      if(user) return res.json(401, {err: 'user already used'});
+      User.create({username: username, email: email, password: password}).exec(function (err, user){
+        return res.json({
+          user: user,
+        });
+      });
+    });
+  },
   refresh: function (req, res) {
     var user = req.user || false;
 

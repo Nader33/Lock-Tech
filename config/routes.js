@@ -33,6 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'post /api/login': 'AuthController.login',
+  'post /api/register': 'AuthController.register',
   'get /api/refresh': 'AuthController.refresh',
 
   'get /api/locks': 'LockController.index'

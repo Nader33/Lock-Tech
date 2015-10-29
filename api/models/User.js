@@ -23,6 +23,8 @@ module.exports = {
       delete obj.createdAt;
       delete obj.updatedAt;
       delete obj.token;
+
+      return obj;
     }
 
   },
