@@ -1,3 +1,1 @@
-# LockTech
-
-a [Sails](http://sailsjs.org) application
+# LockTech - Backend for Lockey

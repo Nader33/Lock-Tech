@@ -1,7 +1,7 @@
 /**
- * LogsController
+ * LogController
  *
- * @description :: Server-side logic for managing logs
+ * @description :: Server-side logic for managing Logs
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 

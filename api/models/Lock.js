@@ -9,20 +9,21 @@ module.exports = {
 
   attributes: {
 
-      state:{
-          type : "boolean",
-          required : true
-      },
+    state:{
+      type : "boolean",
+      required : true
+    },
 
-      name:{
-          type:"string",
-          required: true,
-          minLength: 3
-      },
+    name:{
+      type:"string",
+      required: true,
+      minLength: 3
+    },
 
-      userlist:{
-        collection: 'user'
-      }
+    users:{
+      collection: 'User',
+      via: 'locks'
+    }
 
   }
 };
