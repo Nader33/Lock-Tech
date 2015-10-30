@@ -12,97 +12,95 @@ module.exports = {
     Lock.findAll(function(err, users){
       if (err) return res.send(err, 500);
 
-      res.view({
-        model: locks
+      //res.view({
+      //  model: locks
+      //});
+    });
+  },
+
+  create: function (req, res) {
+    var user = req.user || false;
+
+    var params = _.extend(req.query || {}, req.params || {}, req.body || {}, {users: user.id});
+
+    Lock.create(params).exec(function (err, newLock) {
+
+      Lock.findOne({id: newLock.id}).populate('users').exec(function(err, lock){
+
+        if(err) return res.json(403, {err: 'forbidden'});
+        if(!lock) return res.json(401, {err: 'Lock could not be created'});
+
+        return res.json({
+            lock: lock
+          });
+
       });
     });
-  }
-
-  /*
-   'new': function(req,res) {
-   res.view();
-   },
+  },
 
 
-   create: function(req,res) {
-   var params = _.extend(req.query || {}, req.params || {}, req.body || {});
+  show: function (req,res) {
 
-   User.create(params, function userCreated (err, createdUser) {
+    var id = req.param('id');
 
-   if (err) return res.send(err,500);
-
-   res.redirect('/user/show/'+ createdUser.id);
-   });
-   },
-
-   show: function (req,res) {
-
-   var id = req.param('id');
-
-   if (!id) return res.send("No id specified.", 500);
+    if (!id) return res.send("No id specified.", 500);
 
 
-   User.find(id, function userFound(err, user) {
-   if(err) return res.sender(err,500);
-   if(!user) return res.send("User "+id+" not found", 404);
+    Lock.find(id, function (err, lock) {
+      if(err) return res.sender(err,500);
+      if(!lock) return res.send("Lock "+id+" not found", 404);
 
-   res.view({
-   user:user
-   })
-   });
-   },
+       return res.json({
+        lock:lock
+      });
+    });
+  },
 
-   edit: function (req,res) {
-   var id = req.param('id');
+  destroy: function (req,res) {
+    var id = req.param('id');
+    if (!id) return res.send("No id specified.",500);
 
-   if (!id) return res.send("No id specified.",500);
 
-   User.find(id, function userFound (err,user){
-   if (err) return res.send(err,500);
-   if (!user) return res.send("User "+id+" not found.",404);
+    Lock.find(id, function (err, lock) {
+      if (err) return res.sender(err, 500);
+      if (!lock) return res.send("Lock " + id + " not found", 404);
 
-   res.view({
-   user: user
-   })
-   });
-   },
 
+      Lock.destroy(id, function (err) {
+        if (err) return res.send(err, 500);
+
+
+        return res.json({
+          lock: 'Lock destroyed'
+        });
+      });
+    });
+  },
 
    update: function (req,res) {
 
-   var params = _.extend(req.query || {}, req.params || {}, req.body || {});
-   var id = params.id;
+     var id = req.param('id');
 
-   if (!id) return res.send("No id specified.",500);
+     if (!id) return res.send("No id specified.", 500);
 
-   User.update(id, params, function userUpdated(err, updatedUser) {
-   if (err) {
-   res.redirect('/user/edit');
+     var params = _.extend(req.query || {}, req.params || {}, req.body || {});
+     delete params.id;
+
+     Lock.find(id, function (err, lock) {
+       if (err) return res.sender(err, 500);
+       if (!lock) return res.send("Lock " + id + " not found", 404);
+
+
+       Lock.update(id,params).exec(function (err, lock) {
+
+         if (err) return res.send(err, 500);
+
+
+         return res.json({
+           lock: lock
+         });
+       });
+     });
    }
-   if(!updatedUser) {
-   res.redirect('/user/edit');
-   }
-   res.redirect('/user/show/'+id);
-   });
-   },
-
-
-   destroy: function (req,res) {
-   var id = req.param('id');
-   if (!id) return res.send("No id specified.",500);
-
-   User.find(id, function foundUser(err, user) {
-   if (err) return res.send(err,500);
-   if (!user) return res.send("No user with that idid exists.",404);
-
-   User.destroy(id, function userDestroyed(err) {
-   if (err) return res.send(err,500);
-
-   return res.redirect('/user');
-   });
-
-   })
-   }*/
-
 };
 

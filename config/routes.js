@@ -36,7 +36,12 @@ module.exports.routes = {
   'post /api/register': 'AuthController.register',
   'get /api/refresh': 'AuthController.refresh',
 
-  'get /api/locks': 'LockController.index'
+  //LOCK api
+  'put /api/lock/:id': 'LockController.update',
+  'get /api/locks': 'LockController.index',
+  'post /api/lock/': 'LockController.create',
+  'get /api/lock/:id': 'LockController.show',
+  'delete /api/lock/:id': 'LockController.destroy'
 
 
   /***************************************************************************

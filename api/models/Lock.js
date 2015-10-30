@@ -23,6 +23,13 @@ module.exports = {
     users:{
       collection: 'User',
       via: 'locks'
+    },
+    logs: { collection: 'Log', via: 'lock'},
+
+    toJSON: function() {
+      var obj = this.toObject();
+
+      return obj;
     }
 
   }

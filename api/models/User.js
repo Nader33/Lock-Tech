@@ -15,6 +15,7 @@ module.exports = {
     token     : { type: 'text' },
     refreshToken     : { type: 'text' },
     locks: { collection: 'Lock', via: 'users'},
+    logs: { collection: 'Log', via: 'user'},
 
     toJSON: function() {
       var obj = this.toObject();

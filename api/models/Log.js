@@ -9,6 +9,15 @@ module.exports = {
 
   attributes: {
 
+    user:{
+      model: 'user'
+    },
+
+    lock:{
+      model: 'lock'
+    }
+
+
   }
 };
 
