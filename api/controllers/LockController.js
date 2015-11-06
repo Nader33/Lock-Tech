@@ -9,12 +9,10 @@ module.exports = {
 
   index: function (req, res) {
 
-    Lock.findAll(function(err, users){
-      if (err) return res.send(err, 500);
+    User.findOne({id: req.user.id}).populate('locks').exec(function (err, user) {
+      if(err) return res.json(401, {err: 'Locks not retrieved:'+err});
 
-      //res.view({
-      //  model: locks
-      //});
+      return res.json(user.locks);
     });
   },
 
