@@ -39,7 +39,7 @@ module.exports.routes = {
   //LOCK api
   'put /api/lock/:id': 'LockController.update',
   'get /api/locks': 'LockController.index',
-  'post /api/lock/': 'LockController.create',
+  'post /api/lock': 'LockController.create',
   'get /api/lock/:id': 'LockController.show',
   'delete /api/lock/:id': 'LockController.destroy'
 

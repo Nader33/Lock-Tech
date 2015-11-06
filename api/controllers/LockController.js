@@ -23,6 +23,9 @@ module.exports = {
 
     Lock.create(params).exec(function (err, newLock) {
 
+      if(err) return res.json(401, {err: 'Lock not created:'+err});
+
+
       Lock.findOne({id: newLock.id}).populate('users').exec(function(err, lock){
 
         if(err) return res.json(403, {err: 'forbidden'});
