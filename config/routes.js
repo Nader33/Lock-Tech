@@ -41,7 +41,14 @@ module.exports.routes = {
   'get /api/locks': 'LockController.index',
   'post /api/lock': 'LockController.create',
   'get /api/lock/:id': 'LockController.show',
-  'delete /api/lock/:id': 'LockController.destroy'
+  'delete /api/lock/:id': 'LockController.destroy',
+
+  //LOG api
+  'put /api/log/:id': 'LogController.update',
+  'get /api/logs': 'LogController.index',
+  'post /api/log': 'LogController.create',
+  'get /api/log/:id': 'LogController.show',
+  'delete /api/log/:id': 'LogController.destroy'
 
 
   /***************************************************************************

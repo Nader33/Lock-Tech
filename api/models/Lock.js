@@ -11,7 +11,7 @@ module.exports = {
 
     state:{
       type : "boolean",
-      default: true
+      defaultsTo: true
     },
 
     name:{
