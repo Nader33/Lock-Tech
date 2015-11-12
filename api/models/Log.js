@@ -15,8 +15,12 @@ module.exports = {
 
     lock:{
       model: 'lock'
-    }
+    },
+    toJSON: function() {
+      var obj = this.toObject();
 
+      return obj;
+    }
 
   }
 };

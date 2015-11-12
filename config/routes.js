@@ -44,11 +44,11 @@ module.exports.routes = {
   'delete /api/lock/:id': 'LockController.destroy',
 
   //LOG api
-  'put /api/log/:id': 'LogController.update',
+  //'put /api/log/:id': 'LogController.update',
   'get /api/logs': 'LogController.index',
   'post /api/log': 'LogController.create',
-  'get /api/log/:id': 'LogController.show',
-  'delete /api/log/:id': 'LogController.destroy'
+  //'get /api/log/:id': 'LogController.show',
+  //'delete /api/log/:id': 'LogController.destroy'
 
 
   /***************************************************************************
