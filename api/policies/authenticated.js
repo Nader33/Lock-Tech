@@ -1,5 +1,15 @@
 module.exports = function authenticated(req, res, next) {
-  var token = req.headers.authorization || false;
+  var token;
+
+  if(req.isSocket && req.body.token){
+    token = req.body.token || false;
+
+  }
+  else
+  {
+    token = req.headers.authorization || false;
+  }
+
   if(!token) {
     return res.json(401, {user: 'invalid token'});
   }
