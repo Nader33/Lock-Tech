@@ -12,6 +12,7 @@ module.exports = {
     Log.find({user: req.user.id}).populate('lock').populate('user').exec(function (err, logs) {
       if(err) return res.json(401, {err: 'Logs not retrieved:'+err});
 
+      console.log('er', logs);
       return res.json(logs);
     });
   },

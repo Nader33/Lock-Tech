@@ -16,6 +16,9 @@ module.exports = {
     lock:{
       model: 'lock'
     },
+    message: {
+      type: 'string'
+    },
     toJSON: function() {
       var obj = this.toObject();
 

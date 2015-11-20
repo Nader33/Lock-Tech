@@ -27,12 +27,8 @@ module.exports = {
 
     if(req.isSocket && req.body.lock){
       console.log('im a socket');
-      //console.log('im a socket', req.body, req.body.lock);
-      //var params = req.body.lock.lock;
       var params = _.extend(req.body.lock.lock, {users: user.id});
-      console.log('p', params);
     }
-    console.log('my', params);
 
 
     Lock.create(params).exec(function (err, newLock) {
@@ -48,7 +44,9 @@ module.exports = {
         console.log('publish');
         Lock.publishCreate(lock, req);
 
-        Log.create({lock: lock.id, user: req.user.id});
+        Log.create({lock: lock.id, user: req.user.id, message: 'créée'}).exec(function(err, log){
+          console.log(err, log);
+        });
 
         return res.json({
             lock: lock
@@ -89,6 +87,7 @@ module.exports = {
       Lock.destroy(id, function (err) {
         if (err) return res.send(err, 500);
 
+        Log.create({lock: lock.id, user: req.user.id , message: 'supprimée' });
 
         return res.json({
           lock: 'Lock destroyed'
@@ -132,13 +131,14 @@ module.exports = {
              ws_response.on('error',function(e){ console.log(e.message);});
              ws_response.on('data',function(chunk){ ws_data += chunk });
              ws_response.on('end',function(chunk){ console.log('end'); });
-             console.log('ee', ws_data);
+         }).on('error', function(e) {
+           console.log('net error', e);
+         }).end();
+
+
+         message =  lock[0].state ? 'ouverte' : 'fermée';
+         Log.create({lock: lock[0].id, user: req.user.id , message: message }).exec(function(log){
          });
-
-         ws_request.write(ws_data);
-         ws_request.end();
-
-         Log.create({lock: lock.id, user: req.user.id});
 
 
          //Lock.publishUpdate(lock.id, lock, req);
