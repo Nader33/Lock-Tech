@@ -136,12 +136,16 @@ module.exports = {
          }).end();
 
 
-         message =  lock[0].state ? 'ouverte' : 'fermée';
-         Log.create({lock: lock[0].id, user: req.user.id , message: message }).exec(function(log){
+         message =  lock[0].state ? 'fermée' : 'ouverte';
+         Log.create({lock: lock[0].id, user: req.user.id , message: message }).then(function(log){
+
+           console.log('log', log);
+           Log.publishCreate(log, req);
+
          });
 
-
-         //Lock.publishUpdate(lock.id, lock, req);
+         console.log('pubupdate', lock);
+         Lock.publishUpdate(lock[0].id, {name: lock[0].name}, req);
 
          return res.json({
            lock: lock

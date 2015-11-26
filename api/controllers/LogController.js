@@ -13,6 +13,7 @@ module.exports = {
       if(err) return res.json(401, {err: 'Logs not retrieved:'+err});
 
       console.log('er', logs);
+      Log.watch(req.socket);
       return res.json(logs);
     });
   },
